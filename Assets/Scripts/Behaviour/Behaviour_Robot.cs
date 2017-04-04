@@ -16,6 +16,7 @@ public class Behaviour_Robot : MonoBehaviour {
 	public FACEDIRECTION Facing = FACEDIRECTION.FACERIGHT;
 
 	public bool isGrounded = false;
+	public bool stop = false;
 
 
 	// Penser a mettre le circle collider 2d dans les jambes du robot
@@ -46,31 +47,13 @@ public class Behaviour_Robot : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-
 		if (!collisionLever)
 		{
 			//Update object position
 			moveYDA();
-		}
-	//	isGrounded = GetGrounded();
-
-		if (isGrounded)
-		{
-			Debug.Log("Saute");
-			moveDirection = Vector3.zero;
-			moveDirection.x = 1;
-			moveDirection = transform.TransformDirection(moveDirection);
-			moveDirection *= Speed;
-
-			onceJump = true;
-		}
-		else if (!isGrounded && onceJump)
-		{
-			moveDirection.y = jumpSpeed;
-			onceJump = false;
-		}
-		moveDirection.y -= gravity * Time.deltaTime;
-		
+		}		
+		//	isGrounded = GetGrounded();	
+		jump(isGrounded,onceJump);
 
 		// Flip direction if required
 		// Moving left => flip -----------------------------------Moving Right => flip ---------
@@ -133,16 +116,22 @@ public class Behaviour_Robot : MonoBehaviour {
 	private void OnCollisionEnter2D(Collision2D collision)
 	{
 		if(collision.gameObject.name == "ControlLever")
-		{
+		{	
+			stop=true;
 			collisionLever = true;
 			Debug.Log("Collision avec levier !" + collisionLever);
+		}
+		if (collision.gameObject.tag == "GroundLayer")
+		{	
+			isGrounded=true;
+			Debug.Log("Grounded :(");
 		}
 	}
 
 	private void OnCollisionExit2D(Collision2D collision)
 	{
 		if (collision.gameObject.tag == "GroundLayer")
-		{
+		{	isGrounded= false;
 			Debug.Log("sauter !!");
 		}
 	}
@@ -151,6 +140,29 @@ public class Behaviour_Robot : MonoBehaviour {
 	{
 		RobotMovement.position += RobotMovement.right * Speed * Time.deltaTime;
 		return RobotMovement.position;
+	}
+	public void jump(bool sol,bool saut){
+		if (!stop){
+			if (!sol && !saut)
+			{
+				
+				Debug.Log("Saute");
+				RobotMovement.position += RobotMovement.up * 4 * Time.deltaTime;
+				/*moveDirection = Vector3.zero;
+				moveDirection.x = 1;
+				moveDirection = transform.TransformDirection(moveDirection);
+				moveDirection *= Speed;
+				onceJump = true;*/
+			}
+			else if (sol)
+			{
+			//	moveDirection.y = jumpSpeed;
+				onceJump = false;
+			}
+			float temp = gravity * Time.deltaTime;
+			RobotMovement.position.Set(RobotMovement.position.x,temp,RobotMovement.position.z);
+
+		}
 	}
 }
 
