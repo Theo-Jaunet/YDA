@@ -33,11 +33,16 @@ public class Behaviour_Robot : MonoBehaviour {
 	private Vector3 moveDirection = Vector3.zero;
 	bool onceJump = false;
 
+	private Animator ThisAnimator = null;
+	private int MotionVal = Animator.StringToHash("Motion");
 
 	// Use this for initialization
 	void Awake()
 	{
 		RobotMovement = GetComponent<Transform>();
+
+		// Get Animator
+		ThisAnimator = GetComponent<Animator>();
 	}
 
 	// Use this for initialization
@@ -47,11 +52,16 @@ public class Behaviour_Robot : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if (!collisionLever)
+		if (!collisionLever && !stop)
 		{
 			//Update object position
 			moveYDA();
-		}		
+			ThisAnimator.SetFloat(MotionVal, 1, 0.1f, Time.deltaTime);
+		}
+		if (collisionLever || onceJump || stop)
+		{
+			ThisAnimator.SetFloat(MotionVal, 0, 0.1f, Time.deltaTime);
+		}
 		//	isGrounded = GetGrounded();	
 		jump(isGrounded,onceJump);
 
@@ -61,6 +71,8 @@ public class Behaviour_Robot : MonoBehaviour {
 		{
 			FlipDirection();
 		}*/
+
+
 	}
 
 
