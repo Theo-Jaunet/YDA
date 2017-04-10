@@ -56,11 +56,11 @@ public class Behaviour_Robot : MonoBehaviour {
 		{
 			//Update object position
 			moveYDA();
-			ThisAnimator.SetFloat(MotionVal, 1, 0.1f, Time.deltaTime);
+			ThisAnimator.SetFloat(MotionVal, 1, 0.12f, Time.deltaTime);
 		}
 		if (collisionLever || onceJump || stop)
 		{
-			ThisAnimator.SetFloat(MotionVal, 0, 0.1f, Time.deltaTime);
+			ThisAnimator.SetFloat(MotionVal, 0, 0.12f, Time.deltaTime);
 		}
 		//	isGrounded = GetGrounded();	
 		jump(isGrounded,onceJump);
@@ -131,8 +131,13 @@ public class Behaviour_Robot : MonoBehaviour {
 		{	
 			stop=true;
 			collisionLever = true;
+			// activate lever animation
+			GameObject Lever = GameObject.FindGameObjectWithTag("Lever");
+			Animator leverAnim = Lever.GetComponent<Animator>();
+			leverAnim.enabled = !leverAnim.enabled;
 			Debug.Log("Collision avec levier !" + collisionLever);
 		}
+		
 		if (collision.gameObject.tag == "GroundLayer")
 		{	
 			isGrounded=true;
