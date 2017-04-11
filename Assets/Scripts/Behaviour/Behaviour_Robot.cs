@@ -74,22 +74,7 @@ public class Behaviour_Robot : MonoBehaviour {
 
 
 	}
-
-
-	/* -------------------------------------- */
-	// Returns bool - is yda on ground ?
-	/*private bool GetGrounded()
-	{
-		// check Ground
-		Vector2 CircleCenter = new Vector2(RobotMovement.position.x, RobotMovement.position.y) + FeetCollider.offset;
-		Collider2D[] HitColliders = Physics2D.OverlapCircleAll(CircleCenter, FeetCollider.radius, GroundLayer);
-		if (HitColliders.Length > 0)
-		{
-			return true;
-		}
-		return false;
-	}
-	*/
+		
 
 	/* -------------------------------------- */
 	//Engage Jump
@@ -164,7 +149,11 @@ public class Behaviour_Robot : MonoBehaviour {
 			{
 				
 				Debug.Log("Saute");
-				RobotMovement.position += RobotMovement.up * 4 * Time.deltaTime;
+				//RobotMovement.position += RobotMovement.up *5 * Time.deltaTime;
+				ydaBody.velocity= RobotMovement.up *jumpSpeed * Time.deltaTime;
+				onceJump = true;
+
+
 				/*moveDirection = Vector3.zero;
 				moveDirection.x = 1;
 				moveDirection = transform.TransformDirection(moveDirection);
