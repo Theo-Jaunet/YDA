@@ -11,12 +11,17 @@ public class FunctionDatabases : MonoBehaviour {
 	void Start()
 	{
 		functionData = JsonMapper.ToObject(File.ReadAllText(Application.dataPath + "/StreamingAssets/Functions.json"));
+		ConstructFunctionDatabase();
 
+		Debug.Log(database[1].Title);
 	}
 
 	void ConstructFunctionDatabase()
 	{
-
+		for (int i = 0; i < functionData.Count; i++)
+		{
+			database.Add(new Functions((int)functionData[i]["id"], functionData[i]["title"].ToString(), (int)functionData[i]["value"]));
+		}
 	}
 
 }
