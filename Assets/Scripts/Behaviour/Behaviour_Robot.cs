@@ -133,7 +133,8 @@ public class Behaviour_Robot : MonoBehaviour {
 	private void OnCollisionExit2D(Collision2D collision)
 	{
 		if (collision.gameObject.tag == "GroundLayer")
-		{	isGrounded= false;
+		{
+			isGrounded = false;
 			Debug.Log("sauter !!");
 		}
 	}
@@ -143,6 +144,7 @@ public class Behaviour_Robot : MonoBehaviour {
 		RobotMovement.position += RobotMovement.right * Speed * Time.deltaTime;
 		return RobotMovement.position;
 	}
+
 	public void jump(bool sol,bool saut){
 		if (!stop){
 			if (!sol && !saut)
@@ -170,5 +172,6 @@ public class Behaviour_Robot : MonoBehaviour {
 
 		}
 	}
+
 }
 
