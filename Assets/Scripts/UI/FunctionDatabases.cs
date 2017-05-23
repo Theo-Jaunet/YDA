@@ -12,8 +12,6 @@ public class FunctionDatabases : MonoBehaviour {
 	{
 		functionData = JsonMapper.ToObject(File.ReadAllText(Application.dataPath + "/StreamingAssets/Functions.json"));
 		ConstructFunctionDatabase();
-
-		Debug.Log(database[1].Title);
 	}
 
 	void ConstructFunctionDatabase()

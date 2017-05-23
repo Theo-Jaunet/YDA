@@ -16,6 +16,6 @@ public class Item : MonoBehaviour {
 
 	void OnMouseEnter()
 	{
-		transform.parent.parent.GetComponent<PanelController>().selectedItem = this.transform;
+		transform.parent.parent.GetComponent<PanelController>().selectedItem = transform;
 	}
 }

@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class SlotController : MonoBehaviour {
 
+	string actionCase;
+
 	// Use this for initialization
 	void Start () {
-		
+		actionCase = "";
 	}
 	
 	// Update is called once per frame
@@ -18,4 +20,6 @@ public class SlotController : MonoBehaviour {
 	{
 		transform.parent.GetComponent<PanelController>().selectedSlot = this.transform;
 	}
+
+
 }
