@@ -62,9 +62,6 @@ public class CodeManager : MonoBehaviour {
 			indexArrayGO++;
 		}
 
-		print("ending of the loop of ze death");
-
-
 		for (int i = 0; i < gameObjects.Length; i++)
 		{
 			actionCases[i] = gameObjects[i].ToString() + gameObjects[i].transform.GetChild(0).ToString();

@@ -23,6 +23,7 @@ public class PanelController : MonoBehaviour {
 		{
 			selectedItem.position = Input.mousePosition;
 		}
+
 		else if (Input.GetMouseButtonUp(0) && selectedItem != null)
 		{
 			if (selectedSlot == null) selectedItem.parent = originalSlot;
@@ -30,6 +31,7 @@ public class PanelController : MonoBehaviour {
 			{
 				selectedItem.parent = selectedSlot;
 			}
+
 			selectedItem.localPosition = Vector3.zero;
 			selectedItem.GetComponent<Collider>().enabled = true;
 		}
