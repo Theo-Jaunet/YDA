@@ -4,16 +4,19 @@ using UnityEngine;
 
 public class CodeManager : MonoBehaviour {
 
+	public static CodeManager instance;
+
 	int nbActions = 0;
 
-	string[] actionCases;
+	static Queue<string> actionCases;
 
 	void Update()
 	{
 
 	}
 
-	public string[] getActions()
+
+	public static Queue<string> getActions()
 	{
 		return actionCases;
 	}
@@ -22,7 +25,7 @@ public class CodeManager : MonoBehaviour {
 	{
 		// GO = Game Objects
 		GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("Case");
-		actionCases = new string[gameObjects.Length];
+		actionCases = new Queue<string>(gameObjects.Length);
 		Queue<GameObject> queueTempGO = new Queue<GameObject>();
 		int indexArrayGO = 0;
 
@@ -64,13 +67,12 @@ public class CodeManager : MonoBehaviour {
 
 		for (int i = 0; i < gameObjects.Length; i++)
 		{
-			actionCases[i] = gameObjects[i].ToString() + gameObjects[i].transform.GetChild(0).ToString();
+			actionCases.Enqueue(gameObjects[i].transform.GetChild(0).ToString());
 		}
-
-		for (int i = 0; i < actionCases.Length; i++)
-		{
-			print(actionCases[i]);
-		}
+		/*
+		foreach(string element in actionCases) { 
+			print(element);
+		}*/
 	}
 
 }
